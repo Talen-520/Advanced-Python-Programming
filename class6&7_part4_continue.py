@@ -98,6 +98,77 @@ def my_bin(n):
     return myBinaryNumber
 print(my_bin(10))
 """
+
+#LEGB: Local, Enclosing, Global, Built-in
+#First, Python looks for a local variable in the current function.
+#If it doesn’t find one, it looks for an enclosing variable in the current scope.
+#If it doesn’t find one, it looks for a global variable in the current module.
+#If it doesn’t find one, it looks for a built-in variable in the built-in module.
+#If it doesn’t find one, it raises an exception.
+
+#What if I want to change the value of x, a local variable in the enclosing function? It’s not global, so the 
+#global declaration won’t work. In Python 3, though, we have the nonlocal keyword. This keyword tells 
+#Python: “Any assignment we do to this variable should go to the outer function, not to a (new) local 
+#variable”; 
+def foo():
+   call_counter = 0 
+   def bar(y):
+      nonlocal call_counter
+      call_counter += 1 
+      return f'y = {y}, call_counter = {call_counter}'
+   return bar
+b = foo()
+for i in range(10, 100, 10): 
+   print(b(i)) 
+ 
+
+#Keyword Arguments vs Positional Arguments 
+#关键字参数和位置参数
+#关键要key，位置则对应位置
+
+
+def func(w, x, y, z):
+ statements
+# Keyword argument invocation
+func(x=3, y=22, w='hello', z=[1, 2])
+
+#the order of the arguments doesn’t matter as long as each required parameter gets a single value
+#omit any of the required arguments or if the name of a keyword doesn’t match any of the parameter 
+#names in the function definition, a TypeError exception is raised
+#不能省或缺任何一个,否则会报错，顺序随意
+def func(w, x, y, z):
+ statements
+func('hello', 3, z=[1, 2], y=22) # note z before y, but that’s OK
+func(3, 22, w='hello', z=[1, 2]) # TypeError. Multiple values for w
+func(3, 22, y='hello', z=[1, 2]) # This does work
+
+
+
+#modify and reassign
+def square(items):
+ for i, x in enumerate(items):
+   items[i] = x * x # Modify items in-place
+a = [1, 2, 3, 4, 5]
+square(a) # Changes a to [1, 4, 9, 16, 25]
+
+
+print(a)
+
+
+def sum_squares(items):
+   items = [x*x for x in items] # Reassign "items" name
+   return sum(items)
+a = [1, 2, 3, 4, 5]
+result = sum_squares(a)
+print(a) # [1, 2, 3, 4, 5] (Unchanged)
+print(result) # 55 (Sum of squares
+print(a[2:])
+
+
+a = list("hello")
+print(a)#['h', 'e', 'l', 'l', 'o']
+
+
 #Given a list, print the elements of that list in reverse order. Do this in two ways.
 
 #solution 1
