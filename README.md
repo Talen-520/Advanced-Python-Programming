@@ -17,3 +17,7 @@ https://www.youtube.com/watch?v=vw-KWfKwvTQ
 
 https://www.youtube.com/watch?v=QDX-1M5Nj7s&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=2
 [![video1]](https://www.youtube.com/watch?v=QDX-1M5Nj7s&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=2)
+
+
+#numpy users guide
+https://numpy.org/doc/1.18/numpy-user.pdf
