@@ -16,3 +16,4 @@ https://www.youtube.com/watch?v=vw-KWfKwvTQ
 # MIT Introduction to Deep Learning | 6.S191
 
 https://www.youtube.com/watch?v=QDX-1M5Nj7s&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=2
+[![video1]](https://www.youtube.com/watch?v=QDX-1M5Nj7s&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=2)
