@@ -6,13 +6,18 @@
 import functools
 def my_decorator(func):
   """ decor"""
-  @functools.wraps(func)
+  @functools.wraps(func)#functools.wraps decorator from the functools module to preserve the original function's name and docstring
   def wrapper(*args, **kwargs):
     """ wrapper"""
     print("Before the function is called.")
     result = func(*args, **kwargs)
-    #print(result)
+    #calls the original function (func) with the given arguments and keyword arguments.
+    #By using *args and **kwargs in the function call, the original function (func) can accept any number of positional and keyword arguments.
+    #print(result) 
     print("After the function is called.")
+    while result <7 :
+        print("add 1!,then",result)
+        result+=1
     return result
   return wrapper
 @my_decorator
@@ -27,7 +32,7 @@ print(z,my_function.__name__) # Output: "my_function"
 print(z,my_function.__doc__) #my func
 print(z,my_decorator.__doc__)#decor
 print(z,my_decorator.__name__)#my_decorator
-e=my_function(2,4)
+'''e=my_function(2,4)
 c = abe(2,3)
 print(c)
 print(abe.__doc__)
@@ -37,4 +42,67 @@ def abc(x,y):
   return x-y
 d = abc(2,3)
 print(d)
+'''
 
+
+
+
+
+
+import functools
+
+def my_decorator(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        """Wrapper function"""
+        print("Before the function is called.")
+        result = func(*args, **kwargs)
+        print("After the function is called.")
+        return result
+    return wrapper
+
+@my_decorator
+def mult(x, y):
+    """mult func"""
+    return x * y
+
+z = mult(2, 3)
+print(z, mult.__name__)  # Output: "mult"
+print(z, mult.__doc__)
+
+
+#Write a decorator that when applied to a function will keep track of how many times that 
+#function has been called. It will do this by keeping count of the calls to the decorated functions in 
+#a dictionary passed to the decorator. 
+import functools
+
+def countcalls(calldict):#have to pass calldict into countcalls function to access it
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            # before call
+            if func.__name__ in calldict:
+                calldict[func.__name__] += 1
+            else:
+                calldict[func.__name__] = 1
+            result = func(*args, **kwargs)  # Call the original function
+            return result
+        return wrapper
+    return decorator
+
+calldict = {}  # calldict is the dictionary
+
+@countcalls(calldict) #countcalls is the decorator
+def add(x,y):
+ return x+y
+@countcalls(calldict)
+def mult(x,y):
+ return x*y
+
+
+z=add(2,3)
+print(calldict)
+z=add(2,3)
+print(calldict)
+z=mult(2,3)
+print(calldict)

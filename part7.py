@@ -64,7 +64,7 @@ def next_prime():
     primes = []
     while True:
         is_prime = True 
-        for p in primes:
+        for p in primes:#since the list is empty initially, the for loop for i in list does not execute in the first iteration, so 2 is yield.
             if n % p == 0:
                 is_prime = False
                 break

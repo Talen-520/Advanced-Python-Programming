@@ -217,30 +217,29 @@ print(addTwoNumbers(a,b))
 """
 
 #find saddle point
+#Now, here is a definition: A saddle point in a 2 dimensional square table is an entry in the table whose
+#value is the minimum in its row and maximum in its column. In the table below, 0 is a saddle point.
+#[[2,0],[0,-2]]
+
+#Write a function to find a saddle point in a 2 dimensional table in any two dimensional square of
+#integers, if one exists. If a saddle point was found return a triple (value, x pos, y pos). If a saddle point
+#was not found return “not foun"
 my_array = [[2,0],[0,-2]]
 saddlePoints = min(my_array[0])
 print(saddlePoints)
 result = "not found"
-def findSaddlePoints(my_array):
-    for i in range(len(my_array)):
-        for j in range(len(my_array[i])):
-            if i == 0 and my_array[i][j] == saddlePoints:
+
+def findSaddlePoints(array):
+    for i in range(len(array)):
+        for j in range(len(array[i])):
+            if i == 0 and array[i][j] == saddlePoints:
                 x = i
                 y = j
             if(i > 0):
-                if(my_array[i][y] >= saddlePoints):
+                if(array[i][y] >= saddlePoints):
                     return result
     return (saddlePoints, x, y)
 print(findSaddlePoints(my_array))
-
-
-
-
-
-
-
-
-
 
 
 
@@ -278,7 +277,13 @@ for p in candidates:
 #‘,’, or’;’ tacked on at the end. clear() will return a list with the original words stripped of the
 #punctuation
 
-
+def clear(x):
+    result = []
+    for i in x:
+        result.append(i.replace('.', '').replace(',', '').replace(';', '').strip())
+    return result
+word_list = ["   Hello,", "  World!", "Python   ;"]
+print(clear(word_list))
 
 #Write a function scrape(s) which take a string s representing the HTML of a web page and returns a
 #list of all links found on the page. We recognize the beginning of a link by looking for ‘http://’.
@@ -383,12 +388,16 @@ print(is_len('hello', 6))
 #Write a function one_upper(s) which returns True if exactly one character in string s is capitalized, and
 #False otherwise. You can assume that the string s contains only alphabetic characters and no blanks. You
 #might want to consider other string functions from the documentation.
-def one_upper(s):
+def one_upper(x):
     count = 0
-    for i in s:
+    for i in x:
         if i.isupper():
             count+=1
-    return count == 1
+            if count > 1:
+                return False
+    return True
+print(one_upper('Hello'))
+print(one_upper('HEEllo'))
 
 #Write a function clear(x) where x is a list of “words”. Each word is a string that might have either a ‘.’
 #‘,’, or’;’ tacked on at the end. clear() will return a list with the original words stripped of the
@@ -405,10 +414,14 @@ print(clear(a))
 def clear(x):
     result = []
     for i in x:
-        result.append(i.rstrip('.,;'))
+        #result.append(i.strip().rstrip('.,;'))
+        result.append(i.strip('.,; ')) 
+        #strip() remove whitspace, if you applied with punchuation, make sure add' ' to do same effect
         #rstrip() removes the specified characters from the right side of the 
         #string.lstrip() removes the specified characters from the left side of the string.strip() removes the specified characters from both left and right sides of the string.
     return result
+a = ['Hello, ', ' THE. ', 'world;']
+print(clear(a))
 
 #Write a program that prompts the user for some integer n, and calculates the number of occurrences of 
 #the digit ‘1’ in all the numbers from 1-n inclusive.
@@ -421,13 +434,13 @@ def count_ones(n):
 print(count_ones(s))
 
 #open file and read
-with open('C:/Users/Owner/OneDrive/Desktop/Python Code/text file/text.txt') as f:
+with open('C:/Users/Owner/OneDrive/Desktop/Python Code/Advanced-Python-Programming/text file/text.txt') as f:
     for line in f:
-        print(line, end='') # end='' omits the extra newline
+        print(line, end='') # end='' omits the extra newline消除空格行
 
 #Once control leaves this block, the file is automatically closed. If you don’t use the with statement, the 
 #code would need to look like this:
-f = open('C:/Users/Owner/OneDrive/Desktop/Python Code/text file/text.txt')
+f = open('C:/Users/Owner/OneDrive/Desktop/Python Code/Advanced-Python-Programming/text file/text.txt')
 for line in f:
     print(line, end='') # end='' omits the extra newline
 file.close()
@@ -437,13 +450,13 @@ file.close()
 #closed for you
 
 #If you want to read the file in its entirety as a string, use the read() method like this:
-with open('data.txt') as file:
+with open('C:/Users/Owner/OneDrive/Desktop/Python Code/Advanced-Python-Programming/text file/text.txt') as file:
  data = file.read()
 
 
 #Write a program to read this file and print out the students name followed by their average on all
 #exams.
-with open('C:/Users/Owner/OneDrive/Desktop/Python Code/text file/grades.txt') as f:
+with open('C:/Users/Owner/OneDrive/Desktop/Python Code/Advanced-Python-Programming/text file/grades.txt') as f:
     for line in f:
         s = line.split()
         average = sum([int(s[i]) for i in range(1,len(s))])/(len(s)-1)
