@@ -423,7 +423,7 @@ print(a)
 """
 #Make sure that you can explain each of the following:
 """
-a=3*3*[[0]]#3*3*[[0]] = 3*3*[[0, 0, 0, 0]]
+a=3*3*[[0]]#3*3*[[0]] = 3*[[0], [0], [0]]
 print(a)
 a=3*3*[0]#3*3*[0] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 print(a)
