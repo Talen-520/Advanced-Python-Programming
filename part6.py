@@ -206,3 +206,100 @@ f=open('slwords','wb')
 print('Pickling ... please wait.')
 pickle.dump(d,f) # this pickles
 f.close()
+
+
+
+import string
+
+
+#open the file, get the contents into a list of tuples
+word_list = []
+with open("C:/Users/Owner/OneDrive/Desktop/Python Code/Advanced-Python-Programming/text file/templates/381p_inverted.txt") as file:
+ line_number = 0
+ index_dict = {}
+ for line in file:
+   line_number += 1
+   table = str.maketrans('', '', string.punctuation) #remove punctuation 替换所有标点符号为空None
+   current_line = line.lower().translate(table).split()
+   #print("the current_line is",current_line, line_number)
+   #output the current_line is ['four', 'score', 'and', 'seven', 'years', 'ago', 'our', 'fathers', 'brought', 'forth', 'on', 'this', 'continent', 'a', 'new', 'nation', 'conceived', 'in', 'liberty', 'and', 'dedicated', 'to', 'the', 'proposition', 'that', 'all', 'men', 'are', 'created', 'equal'] 1
+   for word in current_line:
+     if word in index_dict:
+       index_dict[word].append(line_number)
+     else:
+       index_dict[word] = [line_number] 
+for word, index_list in index_dict.items():
+    print(word + ": ") #output four:
+    print(index_list) # index_list range from 1 to 3
+#output: for people
+#people:
+#[3, 3, 3]
+#because the word people appears 3 times in line 3
+#output: for it
+#it:
+#[2, 3, 3, 3, 3]
+#because the word it appears 4 times in line 3 and 1 time in line 2
+
+#maketran example, replace all punctuation with None
+'''
+import string
+s = "Hello, world! This is a string with punctuation."
+table = str.maketrans('', '', string.punctuation)
+s = s.translate(table)
+print(s)  # Output: Hello world This is a string with punctuation
+'''
+#index_dict[word].append(line_number)
+
+#append example
+'''
+my_dict = {"key1": "value1", "key2": "value2", "key3": ["value3a", "value3b"]}
+my_dict["key3"].append("value3c")
+print(my_dict)
+#output {'key1': 'value1', 'key2': 'value2', 'key3': ['value3a', 'value3b', 'value3c']}
+'''
+
+#another version:
+# Part 1: Create a simplified inverted index
+invertedDict = {}
+
+# Read the text file
+with open("C:/Users/Owner/OneDrive/Desktop/Python Code/Advanced-Python-Programming/text file/templates/381p_inverted.txt", "r") as f:
+    # Loop over each line in the file
+    for lineNum, line in enumerate(f, start=1):
+        # Split the line into words
+        words = line.split()
+        # Loop over each word in the line
+        for word in words:
+            # Add the line number to the list for the word in the inverted index
+            if word in invertedDict:
+                invertedDict[word].append(lineNum)
+            else:
+                invertedDict[word] = [lineNum]
+# Part 2: Define the squish function
+def squish(x):
+    # Create a dictionary to count the number of occurrences of each line number
+    counts = {}
+    for num in x:
+        if num in counts:
+            counts[num] += 1
+        else:
+            counts[num] = 1
+    # Convert the dictionary to a list of tuples
+    return list(counts.items())
+# Part 3: Create a full inverted index with counts
+invertedDict = {}
+
+# Read the text file
+with open("C:/Users/Owner/OneDrive/Desktop/Python Code/Advanced-Python-Programming/text file/templates/381p_inverted.txt", "r") as f:
+    # Loop over each line in the file
+    for lineNum, line in enumerate(f, start=1):
+        # Split the line into words
+        words = line.split()
+        # Loop over each word in the line
+        for word in words:
+            # Add a tuple of (line number, count) to the list for the word in the inverted index
+            if word in invertedDict:
+                invertedDict[word].append((lineNum, 1))
+            else:
+                invertedDict[word] = [(lineNum, 1)]
+print(invertedDict)

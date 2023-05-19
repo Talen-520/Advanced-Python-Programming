@@ -167,20 +167,6 @@ x=[[1,2,3],[4,5,6],[7,8,9]]
 y=[[1,2,3],[4,5,6],[7,8,9]]
 print(matrix_mult(x,y))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Write a function that reverses a string. Remember, a string is not mutable! Do it two ways.
 #solution 1
 def reserve_String(x):
